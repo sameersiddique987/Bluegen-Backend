@@ -15,7 +15,8 @@ app.use(cookieParser());
 
 // CORS configuration
 const allowedOrigins = [
- "http://localhost:5173"
+ "http://localhost:5173",
+ "https://bluegen-task.vercel.app"
 ];
 
 app.use(
