@@ -38,7 +38,7 @@ export const deleteReview = async (req, res) => {
       return res.status(403).json({ message: "Not authorized" });
     }
 
-    await review.deleteOne(); // ✅ Correct method
+    await review.deleteOne(); 
     res.status(200).json({ message: "Review deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: "Server error" });

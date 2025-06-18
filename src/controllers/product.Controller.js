@@ -1,10 +1,7 @@
-// controllers/product.controller.js
-
 import Product from '../models/Product.js';
-
 import User from '../models/user.model.js';
 
-// ✅ Get all products
+//  Get all products
 export const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
@@ -14,7 +11,7 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
-// ✅ Get single product by ID (for product detail page)
+//  Get single product by ID
 export const getSingleProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -27,7 +24,7 @@ export const getSingleProduct = async (req, res) => {
   }
 };
 
-// ✅ Toggle wishlist
+//  Toggle wishlist
 export const toggleWishlist = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -52,14 +49,12 @@ export const getWishlist = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).populate({
       path: 'wishlist',
-      select: 'title price description', // optional
+      select: 'title price description', 
     });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-
-    // 🟡 Ye line yahan lagao
     console.log("Fetched User Wishlist:", user?.wishlist);
 
     res.status(200).json({ products: user.wishlist });
@@ -70,7 +65,7 @@ export const getWishlist = async (req, res) => {
 };
 
 
-// ✅ Admin: Add product
+//  Admin: Add product
 export const addProduct = async (req, res) => {
   const { title, description, price } = req.body;
 
@@ -87,7 +82,7 @@ export const addProduct = async (req, res) => {
   }
 };
 
-// ✅ Admin: Update product
+//  Admin: Update product
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
   const { title, description, price } = req.body;
@@ -109,7 +104,7 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-// ✅ Admin: Delete product
+//  Admin: Delete product
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
@@ -124,8 +119,3 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ message: "Delete failed" });
   }
 };
-
-
-
-
-
